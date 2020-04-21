@@ -6,6 +6,7 @@ import { fetchCampuses } from '../store/campuses';
 
 import Nav from './Nav';
 import Home from './Home';
+import Students from './Students';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -18,9 +19,12 @@ const App = () => {
   return (
     <>
       <Nav />
-      <Switch>
-        <Route path="/" component={Home}></Route>
-      </Switch>
+      <div className="container-fluid">
+        <Switch>
+          <Route path="/students" component={Students} />
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </div>
     </>
   );
 };
