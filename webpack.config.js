@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = {
   entry: './client/index.js',
   output: {
@@ -13,9 +11,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
+        loader: 'babel-loader',
       },
     ],
   },

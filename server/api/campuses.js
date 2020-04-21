@@ -3,7 +3,7 @@ const { Campus } = require('../db/models');
 
 router.get('/', (req, res, next) => {
   Campus.findAll()
-    .then((campuses) => res.send(campuses))
+    .then(campuses => res.send(campuses))
     .catch(next);
 });
 

@@ -47,10 +47,10 @@ const campuses = doTimes(numOfCampuses, randomCampus);
 const students = doTimes(numOfStudents, randomStudent);
 
 const seed = () => {
-  return Promise.all(campuses.map((campus) => campus.save())).then(() =>
+  return Promise.all(campuses.map(campus => campus.save())).then(() =>
     Promise.all(
-      students.map((student) =>
-        student.save().then((student) => {
+      students.map(student =>
+        student.save().then(student => {
           const randomCampus = chance.pickone(campuses);
           student.setCampus(randomCampus);
         })
@@ -67,7 +67,7 @@ db.sync({ force: true })
     return seed();
   })
   .then(() => console.log('Database successfully seeded!'))
-  .catch((err) => console.log('Error while seeding!', err))
+  .catch(err => console.log('Error while seeding!', err))
   .finally(() => {
     db.close();
     return null;
