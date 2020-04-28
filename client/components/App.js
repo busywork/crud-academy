@@ -7,6 +7,7 @@ import { fetchCampuses } from '../store/campuses';
 import Nav from './Nav';
 import Home from './Home';
 import Students from './Students';
+import Student from './Student';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,14 @@ const App = () => {
       <Nav />
       <div className="container-fluid">
         <Switch>
-          <Route path="/students" component={Students} />
+          <Route
+            exact
+            path="/students/:id"
+            render={({ match, history }) => (
+              <Student history={history} id={match.params.id} />
+            )}
+          />
+          <Route exact path="/students" component={Students} />
           <Route exact path="/" component={Home} />
         </Switch>
       </div>

@@ -62,15 +62,27 @@ nav a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px 0 15px 0;
-  background-color: #000000;
+  padding: 15px;
+  margin: 15px;
   border-radius: 5px;
-  margin: 15px 15px;
   color: #ffffff;
+  background-color: #ffffff;
 }
 
 .studentImage {
+  width: 50%;
   border-radius: 50%;
   width: 185px;
   height: 185px;
+}
+
+#studentDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 5px;
+  color: black;
+  background-color: #ffffff;
 }
