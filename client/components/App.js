@@ -8,6 +8,8 @@ import Nav from './Nav';
 import Home from './Home';
 import Students from './Students';
 import Student from './Student';
+import Campuses from './Campuses';
+import Campus from './Campus';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,6 +32,14 @@ const App = () => {
             )}
           />
           <Route exact path="/students" component={Students} />
+          <Route
+            exact
+            path="/campuses/:id"
+            render={({ match, history }) => (
+              <Campus history={history} id={match.params.id} />
+            )}
+          />
+          <Route exact path="/campuses" component={Campuses} />
           <Route exact path="/" component={Home} />
         </Switch>
       </div>
