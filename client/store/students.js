@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_STUDENTS } from './constants';
+import { GET_STUDENTS, CREATE_STUDENT } from './constants';
 
 export const fetchStudents = () => {
   return dispatch => {
@@ -10,10 +10,24 @@ export const fetchStudents = () => {
   };
 };
 
+export const createStudent = (student, history) => {
+  return dispatch => {
+    return axios
+      .post('/api/students', student)
+      .then(res => res.data)
+      .then(student => {
+        dispatch({ type: CREATE_STUDENT, student });
+        history.push(`/students/${student.id}`);
+      });
+  };
+};
+
 const studentReducer = (state = [], action) => {
   switch (action.type) {
     case GET_STUDENTS:
       return action.students;
+    case CREATE_STUDENT:
+      return [...state, action.student];
     default:
       return state;
   }

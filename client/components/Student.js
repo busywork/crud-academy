@@ -17,7 +17,7 @@ const Student = props => {
           <img className="studentImage" src={student.imageURL} />
           <br />
           <div className="center">
-            <h5>{student.firstName}</h5>
+            <h5>{`${student.firstName} ${student.lastName}`}</h5>
             {student.email}
             <br />
             {student && campus ? campus.name : `Not Enrolled`}

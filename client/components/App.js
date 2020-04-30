@@ -8,6 +8,7 @@ import Nav from './Nav';
 import Home from './Home';
 import Students from './Students';
 import Student from './Student';
+import StudentForm from './StudentForm';
 import Campuses from './Campuses';
 import Campus from './Campus';
 
@@ -24,6 +25,11 @@ const App = () => {
       <Nav />
       <div className="container-fluid">
         <Switch>
+          <Route
+            exact
+            path="/students/create"
+            render={({ history }) => <StudentForm history={history} />}
+          />
           <Route
             exact
             path="/students/:id"
