@@ -17,7 +17,7 @@ const CampusItem = props => {
           <h5>{`${campus.name}`}</h5>
         </Link>
         {students
-          ? `${students.length} enrolled students`
+          ? `${students.length} students enrolled`
           : 'No students enrolled.'}
       </div>
     </div>

@@ -11,6 +11,7 @@ import Student from './Student';
 import StudentForm from './StudentForm';
 import Campuses from './Campuses';
 import Campus from './Campus';
+import CampusForm from './CampusForm';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,11 @@ const App = () => {
             )}
           />
           <Route exact path="/students" component={Students} />
+          <Route
+            exact
+            path="/campuses/create"
+            render={({ history }) => <CampusForm history={history} />}
+          />
           <Route
             exact
             path="/campuses/:id"

@@ -23,8 +23,12 @@ const Campus = props => {
             {`${campus.city}, ${campus.state} ${campus.zip}`}
             <br />
             {campus && students
-              ? `${students.length} enrolled`
+              ? `${students.length} students enrolled`
               : `No students enrolled`}
+          </div>
+          <div>
+            <br />
+            {campus.description}
           </div>
         </div>
       </>

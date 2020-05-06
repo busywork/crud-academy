@@ -7,4 +7,10 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+router.post('/', (req, res, next) => {
+  Campus.create(req.body)
+    .then(campus => res.send(campus))
+    .catch(next);
+});
+
 module.exports = router;
