@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_STUDENTS, CREATE_STUDENT } from './constants';
+import { GET_STUDENTS, CREATE_STUDENT, UPDATE_STUDENT } from './constants';
 
 export const fetchStudents = () => {
   return dispatch => {
@@ -22,12 +22,28 @@ export const createStudent = (student, history) => {
   };
 };
 
+export const updateStudent = (student, history) => {
+  return dispatch => {
+    return axios
+      .put(`/api/students/${student.id}`, student)
+      .then(res => res.data)
+      .then(student => {
+        dispatch({ type: UPDATE_STUDENT, student });
+        history.push(`/students/${student.id}`);
+      });
+  };
+};
+
 const studentReducer = (state = [], action) => {
   switch (action.type) {
     case GET_STUDENTS:
       return action.students;
     case CREATE_STUDENT:
       return [...state, action.student];
+    case UPDATE_STUDENT:
+      return state.map(student =>
+        student.id === action.student.id ? action.student : student
+      );
     default:
       return state;
   }

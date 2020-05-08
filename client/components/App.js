@@ -8,7 +8,8 @@ import Nav from './Nav';
 import Home from './Home';
 import Students from './Students';
 import Student from './Student';
-import StudentForm from './StudentForm';
+import CreateStudent from './CreateStudent';
+import EditStudent from './EditStudent';
 import Campuses from './Campuses';
 import Campus from './Campus';
 import CampusForm from './CampusForm';
@@ -29,13 +30,19 @@ const App = () => {
           <Route
             exact
             path="/students/create"
-            render={({ history }) => <StudentForm history={history} />}
+            render={({ history }) => <CreateStudent history={history} />}
           />
           <Route
             exact
             path="/students/:id"
             render={({ match, history }) => (
-              <Student history={history} id={match.params.id} />
+              <Student id={match.params.id} history={history} />
+            )}
+          />
+          <Route
+            path="/students/:id/edit"
+            render={({ match, history }) => (
+              <EditStudent id={match.params.id} history={history} />
             )}
           />
           <Route exact path="/students" component={Students} />
