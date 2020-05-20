@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_CAMPUSES, CREATE_CAMPUS } from './constants';
+import { GET_CAMPUSES, CREATE_CAMPUS, UPDATE_CAMPUS } from './constants';
 
 export const fetchCampuses = () => {
   return dispatch => {
@@ -22,12 +22,28 @@ export const createCampus = (campus, history) => {
   };
 };
 
+export const updateCampus = (campus, history) => {
+  return dispatch => {
+    return axios
+      .put(`/api/campuses/${campus.id}`, campus)
+      .then(res => res.data)
+      .then(campus => {
+        dispatch({ type: UPDATE_CAMPUS, campus });
+        history.push(`/campuses/${campus.id}`);
+      });
+  };
+};
+
 const campusReducer = (state = [], action) => {
   switch (action.type) {
     case GET_CAMPUSES:
       return action.campuses;
     case CREATE_CAMPUS:
       return [...state, action.campus];
+    case UPDATE_CAMPUS:
+      return state.map(campus =>
+        campus.id === action.campus.id ? action.campus : campus
+      );
     default:
       return state;
   }

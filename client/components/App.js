@@ -12,7 +12,8 @@ import CreateStudent from './CreateStudent';
 import EditStudent from './EditStudent';
 import Campuses from './Campuses';
 import Campus from './Campus';
-import CampusForm from './CampusForm';
+import CreateCampus from './CreateCampus';
+import EditCampus from './EditCampus';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -49,13 +50,19 @@ const App = () => {
           <Route
             exact
             path="/campuses/create"
-            render={({ history }) => <CampusForm history={history} />}
+            render={({ history }) => <CreateCampus history={history} />}
           />
           <Route
             exact
             path="/campuses/:id"
             render={({ match, history }) => (
               <Campus history={history} id={match.params.id} />
+            )}
+          />
+          <Route
+            path="/campuses/:id/edit"
+            render={({ match, history }) => (
+              <EditCampus id={match.params.id} history={history} />
             )}
           />
           <Route exact path="/campuses" component={Campuses} />

@@ -13,4 +13,11 @@ router.post('/', (req, res, next) => {
     .catch(next);
 });
 
+router.put('/:id', (req, res, next) => {
+  Campus.findByPk(req.params.id)
+    .then(campus => campus.update(req.body))
+    .then(campus => res.send(campus))
+    .catch(next);
+});
+
 module.exports = router;
