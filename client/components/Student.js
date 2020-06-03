@@ -1,10 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
-const Student = props => {
+const Student = () => {
+  const match = useRouteMatch();
   const { student, campus } = useSelector(state => {
-    const student = state.students.find(student => student.id === props.id * 1);
+    const student = state.students.find(
+      student => student.id === match.params.id * 1
+    );
     const campus = student
       ? state.campuses.find(campus => campus.id === student.campusId)
       : null;
@@ -21,7 +24,7 @@ const Student = props => {
         <h5>{`${student.firstName} ${student.lastName}`}</h5>
         {student.email}
         <br />
-        {student && campus ? campus.name : `Not Enrolled`}
+        {campus ? campus.name : 'Not enrolled.'}
         <br />
         <br />
         <Link to={`/students/${student.id}/edit`}>

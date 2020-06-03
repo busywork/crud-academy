@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createStudent } from '../store/students';
 
 const CreateStudent = props => {
   const { history } = props;
   const dispatch = useDispatch();
+  const campuses = useSelector(state => state.campuses);
   const [state, setState] = useState({
     firstName: '',
     lastName: '',
@@ -67,6 +68,22 @@ const CreateStudent = props => {
           }}
           className="form-control"
         />
+      </div>
+      <div className="form-group">
+        <label>Campus</label>
+        <select
+          className="form-control"
+          onChange={e => onChange('campusId', e.target.value * 1)}
+        >
+          <option value={undefined}> --- Select a Campus --- </option>
+          {campuses.map(campus => {
+            return (
+              <option key={campus.id} value={campus.id}>
+                {campus.name}
+              </option>
+            );
+          })}
+        </select>
       </div>
       <div className="center">
         <button type="submit" className="btn btn-primary">

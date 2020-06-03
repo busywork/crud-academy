@@ -1,15 +1,30 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import StudentItem from './StudentItem';
+import { updateStudent } from '../store/students';
 
 const Campus = props => {
-  const { students, campus } = useSelector(state => {
+  const { history } = props;
+  const dispatch = useDispatch();
+  const { students, campus, unenrolled } = useSelector(state => {
     const campus = state.campuses.find(campus => campus.id === props.id * 1);
     const students = campus
       ? state.students.filter(student => campus.id === student.campusId)
       : null;
-    return { students, campus };
+    const unenrolled = campus
+      ? state.students.filter(student => campus.id !== student.campusId)
+      : null;
+    return { students, campus, unenrolled };
   });
+
+  const [state, setState] = useState({});
+
+  const onSubmit = e => {
+    e.preventDefault();
+    state.campusId = campus.id;
+    dispatch(updateStudent(state, history));
+  };
 
   if (!campus) return null;
 
@@ -19,6 +34,8 @@ const Campus = props => {
       <br />
       <div className="center">
         <h5>{campus.name}</h5>
+        {campus.description}
+        <br /> <br />
         {campus.address}
         <br />
         {`${campus.city}, ${campus.state} ${campus.zip}`}
@@ -34,7 +51,40 @@ const Campus = props => {
       </div>
       <div>
         <br />
-        {campus.description}
+      </div>
+      Transfer a student to this campus:
+      <form onSubmit={onSubmit} className="form-inline">
+        <div className="form-group">
+          <select
+            onChange={e =>
+              setState({
+                ...unenrolled.find(
+                  student => student.id === e.target.value * 1
+                ),
+              })
+            }
+            className="form-control"
+          >
+            <option value="-1"> --- Select a Student --- </option>
+            {unenrolled.map(student => (
+              <option key={student.id} value={student.id}>
+                {`${student.firstName} ${student.lastName}`}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button className="btn btn-primary"> Transfer </button>
+      </form>
+      <div className="studentsList">
+        {students.length ? (
+          students.map(student => (
+            <StudentItem key={student.id} student={student} />
+          ))
+        ) : (
+          <div className="center">
+            There are no students currently enrolled at {campus.name}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -5,7 +5,12 @@ import { updateStudent } from '../store/students';
 const EditStudent = props => {
   const { history } = props;
   const dispatch = useDispatch();
-  const students = useSelector(state => state.students);
+  const { students, campuses } = useSelector(state => {
+    const students = state.students;
+    const campuses = state.campuses;
+    return { students, campuses };
+  });
+
   const [state, setState] = useState({
     id: '',
     firstName: '',
@@ -73,6 +78,23 @@ const EditStudent = props => {
           }}
           className="form-control"
         />
+      </div>
+      <div className="form-group">
+        <label>Campus</label>
+        <select
+          value={state.campusId || undefined}
+          onChange={e => onChange('campusId', e.target.value * 1 || undefined)}
+          className="form-control"
+        >
+          <option value={undefined}> --- Select a Campus --- </option>
+          {campuses.map(campus => {
+            return (
+              <option key={campus.id} value={campus.id}>
+                {campus.name}
+              </option>
+            );
+          })}
+        </select>
       </div>
       <div className="center">
         <button type="submit" className="btn btn-primary">
