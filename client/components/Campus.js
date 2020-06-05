@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import StudentItem from './StudentItem';
 import { updateStudent } from '../store/students';
 
-const Campus = props => {
-  const { history } = props;
+const Campus = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const match = useRouteMatch();
   const { students, campus, unenrolled } = useSelector(state => {
-    const campus = state.campuses.find(campus => campus.id === props.id * 1);
+    const campus = state.campuses.find(campus => campus.id === match.params.id * 1);
     const students = campus
       ? state.students.filter(student => campus.id === student.campusId)
       : null;
@@ -39,12 +40,9 @@ const Campus = props => {
         {campus.address}
         <br />
         {`${campus.city}, ${campus.state} ${campus.zip}`}
-        <br />
-        {campus && students
-          ? `${students.length} students enrolled`
-          : `No students enrolled`}
-        <br />
-        <br />
+        <br /> <br />
+        {students ? `${students.length} students enrolled` : `No students enrolled`}
+        <br /> <br />
         <Link to={`/campuses/${campus.id}/edit`}>
           <button className="btn btn-primary">Edit</button>
         </Link>
@@ -58,9 +56,7 @@ const Campus = props => {
           <select
             onChange={e =>
               setState({
-                ...unenrolled.find(
-                  student => student.id === e.target.value * 1
-                ),
+                ...unenrolled.find(student => student.id === e.target.value * 1),
               })
             }
             className="form-control"
@@ -77,13 +73,9 @@ const Campus = props => {
       </form>
       <div className="studentsList">
         {students.length ? (
-          students.map(student => (
-            <StudentItem key={student.id} student={student} />
-          ))
+          students.map(student => <StudentItem key={student.id} student={student} />)
         ) : (
-          <div className="center">
-            There are no students currently enrolled at {campus.name}
-          </div>
+          <div className="center">There are no students currently enrolled at {campus.name}</div>
         )}
       </div>
     </div>

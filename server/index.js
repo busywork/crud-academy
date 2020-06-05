@@ -26,7 +26,7 @@ app.get('*', (req, res) => {
 // error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(err.status || 500).send(err.message || 'Internal server error');
+  res.status(err.status || 500).send(err);
 });
 
 app.listen(PORT, () => console.log(`You are connected to port ${PORT}`));

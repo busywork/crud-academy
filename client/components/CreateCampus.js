@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createCampus } from '../store/campuses';
+import { clearErrors } from '../store/errors';
 
-const CreateCampus = props => {
-  const { history } = props;
+const CreateCampus = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const errors = useSelector(state => state.errors);
+
   const [state, setState] = useState({
     name: '',
     description: '',
@@ -15,15 +19,18 @@ const CreateCampus = props => {
     imageURL: '',
   });
 
+  useEffect(() => {
+    return () => {
+      dispatch(clearErrors());
+    };
+  }, []);
+
   const onChange = (key, val) => {
     setState({ ...state, [key]: val });
   };
 
   const onSubmit = e => {
     e.preventDefault();
-    if (state.imageURL === '') {
-      state.imageURL = undefined;
-    }
     dispatch(createCampus(state, history));
   };
 
@@ -36,8 +43,9 @@ const CreateCampus = props => {
           onChange={e => {
             onChange('name', e.target.value);
           }}
-          className="form-control"
+          className={`form-control ${errors.find(err => err.path === 'name') ? 'is-invalid' : ''}`}
         />
+        <div className="invalid-feedback">Please enter a name.</div>
       </div>
       <div className="form-group">
         <label>Description:</label>
@@ -47,8 +55,11 @@ const CreateCampus = props => {
           onChange={e => {
             onChange('description', e.target.value);
           }}
-          className="form-control"
+          className={`form-control ${
+            errors.find(err => err.path === 'description') ? 'is-invalid' : ''
+          }`}
         />
+        <div className="invalid-feedback">Please enter a description.</div>
       </div>
       <div className="form-group">
         <label>Address:</label>
@@ -57,8 +68,11 @@ const CreateCampus = props => {
           onChange={e => {
             onChange('address', e.target.value);
           }}
-          className="form-control"
+          className={`form-control ${
+            errors.find(err => err.path === 'address') ? 'is-invalid' : ''
+          }`}
         />
+        <div className="invalid-feedback">Please enter an address.</div>
       </div>
       <div className="form-row">
         <div className="form-group col-md-6">
@@ -68,8 +82,11 @@ const CreateCampus = props => {
             onChange={e => {
               onChange('city', e.target.value);
             }}
-            className="form-control"
+            className={`form-control ${
+              errors.find(err => err.path === 'city') ? 'is-invalid' : ''
+            }`}
           />
+          <div className="invalid-feedback">Please enter a city.</div>
         </div>
         <div className="form-group col-md-4">
           <label>State: </label>
@@ -78,8 +95,11 @@ const CreateCampus = props => {
             onChange={e => {
               onChange('state', e.target.value);
             }}
-            className="form-control"
+            className={`form-control ${
+              errors.find(err => err.path === 'state') ? 'is-invalid' : ''
+            }`}
           />
+          <div className="invalid-feedback">Please enter a state.</div>
         </div>
         <div className="form-group col-md-2">
           <label>Zip: </label>
@@ -88,8 +108,9 @@ const CreateCampus = props => {
             onChange={e => {
               onChange('zip', e.target.value);
             }}
-            className="form-control"
+            className={`form-control ${errors.find(err => err.path === 'zip') ? 'is-invalid' : ''}`}
           />
+          <div className="invalid-feedback">Please enter a zip.</div>
         </div>
       </div>
       <div className="form-group">

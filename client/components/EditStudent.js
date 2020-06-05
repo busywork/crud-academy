@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { updateStudent } from '../store/students';
+import { clearErrors } from '../store/errors';
 
-const EditStudent = props => {
-  const { history } = props;
+const EditStudent = () => {
   const dispatch = useDispatch();
-  const { students, campuses } = useSelector(state => {
+  const history = useHistory();
+  const match = useRouteMatch();
+  const { students, campuses, errors } = useSelector(state => {
     const students = state.students;
     const campuses = state.campuses;
-    return { students, campuses };
+    const errors = state.errors;
+    return { students, campuses, errors };
   });
 
   const [state, setState] = useState({
@@ -20,8 +24,11 @@ const EditStudent = props => {
   });
 
   useEffect(() => {
-    const student = students.find(student => student.id === props.id * 1);
+    const student = students.find(student => student.id === match.params.id * 1);
     setState(student);
+    return () => {
+      dispatch(clearErrors());
+    };
   }, [students]);
 
   const onChange = (key, val) => {
@@ -45,8 +52,11 @@ const EditStudent = props => {
             onChange={e => {
               onChange('firstName', e.target.value);
             }}
-            className="form-control"
+            className={`form-control ${
+              errors.find(err => err.path === 'firstName') ? 'is-invalid' : ''
+            }`}
           />
+          <div className="invalid-feedback">Please enter a first name.</div>
         </div>
         <div className="form-group col-md-6">
           <label>Last Name:</label>
@@ -55,8 +65,11 @@ const EditStudent = props => {
             onChange={e => {
               onChange('lastName', e.target.value);
             }}
-            className="form-control"
+            className={`form-control ${
+              errors.find(err => err.path === 'lastName') ? 'is-invalid' : ''
+            }`}
           />
+          <div className="invalid-feedback">Please enter a last name.</div>
         </div>
       </div>
       <div className="form-group">
@@ -66,8 +79,9 @@ const EditStudent = props => {
           onChange={e => {
             onChange('email', e.target.value);
           }}
-          className="form-control"
+          className={`form-control ${errors.find(err => err.path === 'email') ? 'is-invalid' : ''}`}
         />
+        <div className="invalid-feedback">Please enter an email address.</div>
       </div>
       <div className="form-group">
         <label>Image URL: </label>

@@ -7,3 +7,7 @@ export const UPDATE_STUDENT = 'UPDATE_STUDENT';
 export const GET_CAMPUSES = 'GET_CAMPUSES';
 export const CREATE_CAMPUS = 'CREATE_CAMPUS';
 export const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
+
+/* Error */
+export const ERROR = 'ERROR';
+export const CLEAR_ERROR = 'CLEAR_ERROR';

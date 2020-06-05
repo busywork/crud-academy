@@ -23,11 +23,7 @@ const StudentItem = props => {
         {location.pathname.includes('campuses') ? (
           <button
             className="center btn btn-sm btn-danger"
-            onClick={() =>
-              dispatch(
-                updateStudent({ id: student.id, campusId: null }, history)
-              )
-            }
+            onClick={() => dispatch(updateStudent({ id: student.id, campusId: null }, history))}
           >
             Remove
           </button>

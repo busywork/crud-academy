@@ -8,6 +8,9 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+  if (req.body.imageURL === '') {
+    req.body.imageURL = undefined;
+  }
   Campus.create(req.body)
     .then(campus => res.send(campus))
     .catch(next);

@@ -5,12 +5,8 @@ import { Link, useRouteMatch } from 'react-router-dom';
 const Student = () => {
   const match = useRouteMatch();
   const { student, campus } = useSelector(state => {
-    const student = state.students.find(
-      student => student.id === match.params.id * 1
-    );
-    const campus = student
-      ? state.campuses.find(campus => campus.id === student.campusId)
-      : null;
+    const student = state.students.find(student => student.id === match.params.id * 1);
+    const campus = student ? state.campuses.find(campus => campus.id === student.campusId) : null;
     return { student, campus };
   });
 
@@ -25,8 +21,7 @@ const Student = () => {
         {student.email}
         <br />
         {campus ? campus.name : 'Not enrolled.'}
-        <br />
-        <br />
+        <br /> <br />
         <Link to={`/students/${student.id}/edit`}>
           <button className="btn btn-primary">Edit</button>
         </Link>

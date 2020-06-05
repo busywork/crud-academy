@@ -36,15 +36,11 @@ const App = () => {
           <Route
             exact
             path="/students/:id"
-            render={({ match, history }) => (
-              <Student id={match.params.id} history={history} />
-            )}
+            render={({ match, history }) => <Student id={match.params.id} history={history} />}
           />
           <Route
             path="/students/:id/edit"
-            render={({ match, history }) => (
-              <EditStudent id={match.params.id} history={history} />
-            )}
+            render={({ match, history }) => <EditStudent id={match.params.id} history={history} />}
           />
           <Route exact path="/students" component={Students} />
           <Route
@@ -55,15 +51,11 @@ const App = () => {
           <Route
             exact
             path="/campuses/:id"
-            render={({ match, history }) => (
-              <Campus history={history} id={match.params.id} />
-            )}
+            render={({ match, history }) => <Campus history={history} id={match.params.id} />}
           />
           <Route
             path="/campuses/:id/edit"
-            render={({ match, history }) => (
-              <EditCampus id={match.params.id} history={history} />
-            )}
+            render={({ match, history }) => <EditCampus id={match.params.id} history={history} />}
           />
           <Route exact path="/campuses" component={Campuses} />
           <Route exact path="/" component={Home} />

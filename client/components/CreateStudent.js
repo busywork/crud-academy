@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createStudent } from '../store/students';
+import { clearErrors } from '../store/errors';
 
-const CreateStudent = props => {
-  const { history } = props;
+const CreateStudent = () => {
   const dispatch = useDispatch();
-  const campuses = useSelector(state => state.campuses);
+  const history = useHistory();
+  const { campuses, errors } = useSelector(state => {
+    const campuses = state.campuses;
+    const errors = state.errors;
+    return { campuses, errors };
+  });
+
   const [state, setState] = useState({
     firstName: '',
     lastName: '',
@@ -13,15 +20,18 @@ const CreateStudent = props => {
     imageURL: '',
   });
 
+  useEffect(() => {
+    return () => {
+      dispatch(clearErrors());
+    };
+  }, []);
+
   const onChange = (key, val) => {
     setState({ ...state, [key]: val });
   };
 
   const onSubmit = e => {
     e.preventDefault();
-    if (state.imageURL === '') {
-      state.imageURL = undefined;
-    }
     dispatch(createStudent(state, history));
   };
 
@@ -35,8 +45,11 @@ const CreateStudent = props => {
             onChange={e => {
               onChange('firstName', e.target.value);
             }}
-            className="form-control"
+            className={`form-control ${
+              errors.find(err => err.path === 'firstName') ? 'is-invalid' : ''
+            }`}
           />
+          <div className="invalid-feedback">Please enter a first name.</div>
         </div>
         <div className="form-group col-md-6">
           <label>Last Name:</label>
@@ -45,8 +58,11 @@ const CreateStudent = props => {
             onChange={e => {
               onChange('lastName', e.target.value);
             }}
-            className="form-control"
+            className={`form-control ${
+              errors.find(err => err.path === 'lastName') ? 'is-invalid' : ''
+            }`}
           />
+          <div className="invalid-feedback">Please enter a last name.</div>
         </div>
       </div>
       <div className="form-group">
@@ -56,8 +72,9 @@ const CreateStudent = props => {
           onChange={e => {
             onChange('email', e.target.value);
           }}
-          className="form-control"
+          className={`form-control ${errors.find(err => err.path === 'email') ? 'is-invalid' : ''}`}
         />
+        <div className="invalid-feedback">Please enter an email address.</div>
       </div>
       <div className="form-group">
         <label>Image URL: </label>
@@ -71,10 +88,7 @@ const CreateStudent = props => {
       </div>
       <div className="form-group">
         <label>Campus</label>
-        <select
-          className="form-control"
-          onChange={e => onChange('campusId', e.target.value * 1)}
-        >
+        <select className="form-control" onChange={e => onChange('campusId', e.target.value * 1)}>
           <option value={undefined}> --- Select a Campus --- </option>
           {campuses.map(campus => {
             return (
