@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import StudentItem from './StudentItem';
+import { deleteCampus } from '../store/campuses';
 import { updateStudent } from '../store/students';
 
 const Campus = () => {
@@ -46,6 +47,9 @@ const Campus = () => {
         <Link to={`/campuses/${campus.id}/edit`}>
           <button className="btn btn-primary">Edit</button>
         </Link>
+        <button onClick={() => dispatch(deleteCampus(campus, history))} className="btn btn-danger">
+          Delete
+        </button>
       </div>
       <div>
         <br />

@@ -23,4 +23,11 @@ router.put('/:id', (req, res, next) => {
     .catch(next);
 });
 
+router.delete('/:id', (req, res, next) => {
+  Student.findByPk(req.params.id)
+    .then(student => student.destroy())
+    .then(() => res.sendStatus(204))
+    .catch(next);
+});
+
 module.exports = router;
