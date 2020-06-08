@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useRouteMatch } from 'react-router-dom';
+import { Link, useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import StudentItem from './StudentItem';
 import { deleteCampus } from '../store/campuses';
 import { updateStudent } from '../store/students';
@@ -8,6 +8,7 @@ import { updateStudent } from '../store/students';
 const Campus = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
   const match = useRouteMatch();
   const { students, campus, unenrolled } = useSelector(state => {
     const campus = state.campuses.find(campus => campus.id === match.params.id * 1);
@@ -25,7 +26,7 @@ const Campus = () => {
   const onSubmit = e => {
     e.preventDefault();
     state.campusId = campus.id;
-    dispatch(updateStudent(state, history));
+    dispatch(updateStudent(state, history, location));
   };
 
   if (!campus) return null;

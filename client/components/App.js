@@ -28,35 +28,13 @@ const App = () => {
       <Nav />
       <div className="container-fluid">
         <Switch>
-          <Route
-            exact
-            path="/students/create"
-            render={({ history }) => <CreateStudent history={history} />}
-          />
-          <Route
-            exact
-            path="/students/:id"
-            render={({ match, history }) => <Student id={match.params.id} history={history} />}
-          />
-          <Route
-            path="/students/:id/edit"
-            render={({ match, history }) => <EditStudent id={match.params.id} history={history} />}
-          />
+          <Route exact path="/students/create" render={() => <CreateStudent />} />
+          <Route exact path="/students/:id" render={() => <Student />} />
+          <Route path="/students/:id/edit" render={() => <EditStudent />} />
           <Route exact path="/students" component={Students} />
-          <Route
-            exact
-            path="/campuses/create"
-            render={({ history }) => <CreateCampus history={history} />}
-          />
-          <Route
-            exact
-            path="/campuses/:id"
-            render={({ match, history }) => <Campus history={history} id={match.params.id} />}
-          />
-          <Route
-            path="/campuses/:id/edit"
-            render={({ match, history }) => <EditCampus id={match.params.id} history={history} />}
-          />
+          <Route exact path="/campuses/create" render={() => <CreateCampus />} />
+          <Route exact path="/campuses/:id" render={() => <Campus />} />
+          <Route path="/campuses/:id/edit" render={() => <EditCampus />} />
           <Route exact path="/campuses" component={Campuses} />
           <Route exact path="/" component={Home} />
         </Switch>

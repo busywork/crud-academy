@@ -25,14 +25,16 @@ export const createStudent = (student, history) => {
   };
 };
 
-export const updateStudent = (student, history) => {
+export const updateStudent = (student, history, location) => {
   return dispatch => {
     return axios
       .put(`/api/students/${student.id}`, student)
       .then(res => res.data)
       .then(student => {
         dispatch({ type: UPDATE_STUDENT, student });
-        history.push(`/students/${student.id}`);
+        if (location.pathname.includes('students')) {
+          history.push(`/students/${student.id}`);
+        }
       })
       .catch(err => dispatch(errorHandler(err.response.data.errors)));
   };

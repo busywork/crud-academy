@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import { updateStudent } from '../store/students';
 import { clearErrors } from '../store/errors';
 
 const EditStudent = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
   const match = useRouteMatch();
   const { students, campuses, errors } = useSelector(state => {
     const students = state.students;
@@ -37,7 +38,7 @@ const EditStudent = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    dispatch(updateStudent(state, history));
+    dispatch(updateStudent(state, history, location));
   };
 
   if (!state) return null;
