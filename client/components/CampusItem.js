@@ -9,17 +9,12 @@ const CampusItem = props => {
   );
 
   return (
-    <div id="campusItem">
-      <img className="campusImage" src={campus.imageURL} />
-      <br />
-      <div className="center">
-        <Link className="center" to={`/campuses/${campus.id}`}>
-          <h5>{`${campus.name}`}</h5>
-        </Link>
-        {students
-          ? `${students.length} students enrolled`
-          : 'No students enrolled.'}
-      </div>
+    <div className="listItem">
+      <img className="itemImage" src={campus.imageURL} />
+      <Link className="center" to={`/campuses/${campus.id}`}>
+        <h5>{`${campus.name}`}</h5>
+      </Link>
+      {students ? `${students.length} students enrolled` : 'No students enrolled.'}
     </div>
   );
 };

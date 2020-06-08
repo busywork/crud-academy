@@ -11,7 +11,6 @@ const CreateCampus = () => {
 
   const [state, setState] = useState({
     name: '',
-    description: '',
     address: '',
     city: '',
     state: '',
@@ -46,20 +45,6 @@ const CreateCampus = () => {
           className={`form-control ${errors.find(err => err.path === 'name') ? 'is-invalid' : ''}`}
         />
         <div className="invalid-feedback">Please enter a name.</div>
-      </div>
-      <div className="form-group">
-        <label>Description:</label>
-        <textarea
-          rows="3"
-          value={state.description}
-          onChange={e => {
-            onChange('description', e.target.value);
-          }}
-          className={`form-control ${
-            errors.find(err => err.path === 'description') ? 'is-invalid' : ''
-          }`}
-        />
-        <div className="invalid-feedback">Please enter a description.</div>
       </div>
       <div className="form-group">
         <label>Address:</label>

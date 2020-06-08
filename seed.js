@@ -5,8 +5,8 @@ const faker = require('faker');
 const avatar = require('cartoon-avatar');
 const chance = require('chance')(12345);
 
-const numOfStudents = 100;
-const numOfCampuses = 10;
+const numOfStudents = 12;
+const numOfCampuses = 3;
 
 const doTimes = (n, func) => {
   const result = [];
@@ -23,7 +23,6 @@ const randomCampus = () => {
   const zip = chance.zip();
   return Campus.build({
     name: `${city} Campus`,
-    description: faker.lorem.paragraphs(3),
     address,
     city,
     state,

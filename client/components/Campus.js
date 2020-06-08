@@ -32,58 +32,57 @@ const Campus = () => {
   if (!campus) return null;
 
   return (
-    <div id="campusDetail">
-      <img className="campusImage" src={campus.imageURL} />
-      <br />
-      <div className="center">
+    <>
+      <div className="itemDetail">
+        <img className="itemImage" src={campus.imageURL} />
         <h5>{campus.name}</h5>
-        {campus.description}
-        <br /> <br />
-        {campus.address}
-        <br />
-        {`${campus.city}, ${campus.state} ${campus.zip}`}
-        <br /> <br />
-        {students ? `${students.length} students enrolled` : `No students enrolled`}
-        <br /> <br />
-        <Link to={`/campuses/${campus.id}/edit`}>
-          <button className="btn btn-primary">Edit</button>
-        </Link>
-        <button onClick={() => dispatch(deleteCampus(campus, history))} className="btn btn-danger">
-          Delete
-        </button>
-      </div>
-      <div>
-        <br />
-      </div>
-      Transfer a student to this campus:
-      <form onSubmit={onSubmit} className="form-inline">
-        <div className="form-group">
-          <select
-            onChange={e =>
-              setState({
-                ...unenrolled.find(student => student.id === e.target.value * 1),
-              })
-            }
-            className="form-control"
+        <p>
+          {campus.address}
+          <br />
+          {`${campus.city}, ${campus.state} ${campus.zip}`}
+        </p>
+        <p>{students ? `${students.length} students enrolled` : `No students enrolled`}</p>
+        <div className="mb15">
+          <Link to={`/campuses/${campus.id}/edit`}>
+            <button className="btn btn-primary mr10">Edit</button>
+          </Link>
+          <button
+            onClick={() => dispatch(deleteCampus(campus, history))}
+            className="btn btn-danger"
           >
-            <option value="-1"> --- Select a Student --- </option>
-            {unenrolled.map(student => (
-              <option key={student.id} value={student.id}>
-                {`${student.firstName} ${student.lastName}`}
-              </option>
-            ))}
-          </select>
+            Delete
+          </button>
         </div>
-        <button className="btn btn-primary"> Transfer </button>
-      </form>
-      <div className="studentsList">
+        <p> Transfer a student to this campus:</p>
+        <form onSubmit={onSubmit} className="center">
+          <div className="form-group mr10">
+            <select
+              onChange={e =>
+                setState({
+                  ...unenrolled.find(student => student.id === e.target.value * 1),
+                })
+              }
+              className="form-control"
+            >
+              <option value="-1">--- Select a Student ---</option>
+              {unenrolled.map(student => (
+                <option key={student.id} value={student.id}>
+                  {`${student.firstName} ${student.lastName}`}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button className="btn btn-primary">Transfer</button>
+        </form>
+      </div>
+      <div className="list">
         {students.length ? (
           students.map(student => <StudentItem key={student.id} student={student} />)
         ) : (
           <div className="center">There are no students currently enrolled at {campus.name}</div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

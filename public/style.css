@@ -9,17 +9,62 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.listHeader {
-  text-decoration: underline;
-  flex: 6;
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #000000;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .flex {
   display: flex;
 }
 
+.listHeader {
+  text-decoration: underline;
+  flex: 6;
+}
+
 .addButton {
   flex: 1;
+}
+
+.listItem {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 5px;
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.itemImage {
+  border-radius: 50%;
+  width: 185px;
+  height: 185px;
+  margin-bottom: 15px;
+}
+
+.itemDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 5px;
+  color: #000000;
+  background-color: #ffffff;
 }
 
 .center {
@@ -28,96 +73,51 @@ body {
   margin-right: auto;
 }
 
+.mb15 {
+  margin-bottom: 15px;
+}
+
+.mr10 {
+  margin-right: 10px;
+}
+
 /* Nav */
 
 #nav {
+  font-weight: bold;
   background-color: #000000;
   margin-bottom: 25px;
 }
 
-nav a {
+#nav img {
+  width: 50px;
+  height: 50px;
+}
+
+#nav a {
   color: #ffffff;
   text-decoration: none;
   text-transform: uppercase;
 }
 
-/* Home */
-
-#home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+@media (max-width: 1025px) {
+  .listItem {
+    width: 40%;
+    padding-bottom: 15px;
+    margin: inherit auto;
+  }
 }
 
-/* Students */
+@media (max-width: 660px) {
+  .flex {
+    display: block;
+    margin: inherit auto;
+    text-align: center;
+  }
 
-.studentsList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-#studentItem {
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
-  margin: 15px;
-  border-radius: 5px;
-  color: #000000;
-  background-color: #ffffff;
-}
-
-.studentImage {
-  border-radius: 50%;
-  width: 185px;
-  height: 185px;
-}
-
-#studentDetail {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
-  margin: 15px;
-  border-radius: 5px;
-  color: #000000;
-  background-color: #ffffff;
-}
-
-/* Campuses */
-
-.campusesList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-#campusItem {
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 15px;
-  padding: 15px;
-  border-radius: 5px;
-  color: #000000;
-  background-color: #ffffff;
-}
-
-.campusImage {
-  width: 185px;
-  height: 185px;
-}
-
-#campusDetail {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
-  margin: 15px;
-  border-radius: 5px;
-  color: #000000;
-  background-color: #ffffff;
+  .listItem {
+    width: 100%;
+    padding-bottom: 15px;
+    margin: inherit auto;
+  }
 }

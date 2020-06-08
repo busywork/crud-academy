@@ -16,17 +16,14 @@ const Student = () => {
   if (!student) return null;
 
   return (
-    <div id="studentDetail">
-      <img className="studentImage" src={student.imageURL} />
-      <br />
-      <div className="center">
-        <h5>{`${student.firstName} ${student.lastName}`}</h5>
-        {student.email}
-        <br />
-        {campus ? campus.name : 'Not enrolled'}
-        <br /> <br />
+    <div className="itemDetail">
+      <img className="itemImage" src={student.imageURL} />
+      <h5>{`${student.firstName} ${student.lastName}`}</h5>
+      <p>{student.email}</p>
+      <p>{campus ? `Enrolled at ${campus.name}` : `Not enrolled`}</p>
+      <div>
         <Link to={`/students/${student.id}/edit`}>
-          <button className="btn btn-primary">Edit</button>
+          <button className="btn btn-primary mr10">Edit</button>
         </Link>
         <button
           onClick={() => dispatch(deleteStudent(student, history))}

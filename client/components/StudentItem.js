@@ -13,26 +13,23 @@ const StudentItem = props => {
   );
 
   return (
-    <div id="studentItem">
-      <img className="studentImage" src={student.imageURL} />
-      <br />
-      <div className="center">
-        <Link className="center" to={`/students/${student.id}`}>
-          <h5>{`${student.firstName} ${student.lastName}`}</h5>
-        </Link>
-        {location.pathname.includes('campuses') ? (
-          <button
-            className="center btn btn-danger"
-            onClick={() =>
-              dispatch(updateStudent({ id: student.id, campusId: null }, history, location))
-            }
-          >
-            Remove
-          </button>
-        ) : (
-          <>{campus ? campus.name : 'Not Enrolled'}</>
-        )}
-      </div>
+    <div className="listItem">
+      <img className="itemImage" src={student.imageURL} />
+      <Link className="center" to={`/students/${student.id}`}>
+        <h5>{`${student.firstName} ${student.lastName}`}</h5>
+      </Link>
+      {location.pathname.includes('campuses') ? (
+        <button
+          className="center btn btn-danger"
+          onClick={() =>
+            dispatch(updateStudent({ id: student.id, campusId: null }, history, location))
+          }
+        >
+          Remove
+        </button>
+      ) : (
+        <>{campus ? campus.name : 'Not Enrolled'}</>
+      )}
     </div>
   );
 };
