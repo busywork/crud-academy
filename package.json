@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "seed": "node seed.js",
-    "postinstall": "webpack",
-    "start-dev": "webpack -w & nodemon server",
+    "postinstall": "webpack --mode production",
+    "start-dev": "webpack -w --mode development & nodemon server",
     "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
