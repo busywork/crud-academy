@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 
+const db = require('./db');
 const PORT = 8080;
 
 const app = express();
@@ -28,4 +29,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-app.listen(PORT, () => console.log(`You are connected to port ${PORT}`));
+db.sync().then(() => {
+  console.log('DB synced!');
+  app.listen(PORT, () => console.log(`You are connected to port ${PORT}`));
+});
