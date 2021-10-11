@@ -1,3 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-export default () => <>hello world!</>;
+import { fetchStudents } from '../store/students';
+import { fetchCampuses } from '../store/campuses';
+
+export default () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchStudents());
+    dispatch(fetchCampuses());
+  }, []);
+
+  return <>hello world!</>;
+};
