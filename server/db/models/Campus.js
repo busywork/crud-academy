@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../db');
 
-const Campus = db.define('Campus', {
+const Campus = db.define('campus', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -24,7 +24,7 @@ const Campus = db.define('Campus', {
   },
   imageURL: {
     type: DataTypes.STRING,
-    defaultValue: '',
+    defaultValue: '/images/default_campus.png',
   },
 });
 
