@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { fetchStudents } from '../store/students';
 import { fetchCampuses } from '../store/campuses';
 
+import Navigation from './Navigation';
 import Campuses from './Campuses';
 import Students from './Students';
 
@@ -17,11 +18,14 @@ export default () => {
   }, []);
 
   return (
-    <div className="container">
-      <Switch>
-        <Route exact path="/campuses" component={Campuses} />
-        <Route exact path="/students" component={Students} />
-      </Switch>
-    </div>
+    <>
+      <Navigation />
+      <div className="container">
+        <Switch>
+          <Route exact path="/campuses" component={Campuses} />
+          <Route exact path="/students" component={Students} />
+        </Switch>
+      </div>
+    </>
   );
 };
