@@ -24,6 +24,9 @@ export default () => {
         <Link to="/campuses/create" className="nav-link">
           Add Campus
         </Link>
+        <Link to="/students/create" className="nav-link">
+          Add Student
+        </Link>
       </div>
     </nav>
   );
