@@ -7,6 +7,7 @@ import { fetchCampuses } from '../store/campuses';
 
 import Navigation from './Navigation';
 import Campuses from './Campuses';
+import CreateCampus from './CreateCampus';
 import Students from './Students';
 
 export default () => {
@@ -22,6 +23,7 @@ export default () => {
       <Navigation />
       <div className="container">
         <Switch>
+          <Route exact path="/campuses/create" render={() => <CreateCampus />} />
           <Route exact path="/campuses" component={Campuses} />
           <Route exact path="/students" component={Students} />
         </Switch>
