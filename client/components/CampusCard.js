@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default props => {
   const { campus } = props;
@@ -17,10 +18,15 @@ export default props => {
             {`${campus.address}, ${campus.city}, ${campus.state} ${campus.zip}`}
           </p>
         </div>
-        <div className="card-footer">
+        <div className="card-footer d-flex justify-content-between align-items-center">
           <small className="text-muted">
             {students.length ? `${students.length} students enrolled` : 'No students enrolled.'}
           </small>
+          <Link to={`/campuses/${campus.id}/edit`}>
+            <button type="button" className="btn btn-secondary btn-sm">
+              Edit
+            </button>
+          </Link>
         </div>
       </div>
     </div>

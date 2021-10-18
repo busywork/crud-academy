@@ -1,6 +1,7 @@
 /* Campus */
 export const GET_CAMPUSES = 'GET_CAMPUSES';
 export const CREATE_CAMPUS = 'CREATE_CAMPUS';
+export const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
 
 /* Student */
 export const GET_STUDENTS = 'GET_STUDENTS';
