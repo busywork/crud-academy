@@ -11,6 +11,7 @@ import CreateCampus from './CreateCampus';
 import EditCampus from './EditCampus';
 import Students from './Students';
 import CreateStudent from './CreateStudent';
+import EditStudent from './EditStudent';
 
 export default () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ export default () => {
           <Route path="/campuses/:id/edit" render={() => <EditCampus />} />
           <Route exact path="/students" component={Students} />
           <Route exact path="/students/create" render={() => <CreateStudent />} />
+          <Route path="/students/:id/edit" render={() => <EditStudent />} />
         </Switch>
       </div>
     </>

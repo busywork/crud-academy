@@ -6,3 +6,4 @@ export const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
 /* Student */
 export const GET_STUDENTS = 'GET_STUDENTS';
 export const CREATE_STUDENT = 'CREATE_STUDENT';
+export const UPDATE_STUDENT = 'UPDATE_STUDENT';
