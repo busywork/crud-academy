@@ -1,9 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-export default props => {
-  const { campus } = props;
+import { deleteCampus } from '../store/campuses';
+
+export default ({ campus }) => {
+  const dispatch = useDispatch();
   const students = useSelector(state =>
     state.students.filter(student => student.campusId === campus.id)
   );
@@ -22,11 +24,20 @@ export default props => {
           <small className="text-muted">
             {students.length ? `${students.length} students enrolled` : 'No students enrolled.'}
           </small>
-          <Link to={`/campuses/${campus.id}/edit`}>
-            <button type="button" className="btn btn-secondary btn-sm">
-              Edit
+          <div>
+            <Link to={`/campuses/${campus.id}/edit`}>
+              <button type="button" className="btn btn-secondary btn-sm">
+                Edit
+              </button>
+            </Link>
+            <button
+              type="button"
+              className="btn btn-danger btn-sm ms-1"
+              onClick={() => dispatch(deleteCampus(campus))}
+            >
+              Delete
             </button>
-          </Link>
+          </div>
         </div>
       </div>
     </div>
