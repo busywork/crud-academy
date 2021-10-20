@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_STUDENTS, CREATE_STUDENT, UPDATE_STUDENT } from './constants';
+import { GET_STUDENTS, CREATE_STUDENT, UPDATE_STUDENT, DELETE_STUDENT } from './constants';
 
 export const fetchStudents = () => dispatch =>
   axios
@@ -19,6 +19,11 @@ export const updateStudent = student => dispatch =>
     .then(res => res.data)
     .then(student => dispatch({ type: UPDATE_STUDENT, student }));
 
+export const deleteStudent = student => dispatch =>
+  axios
+    .delete(`/api/students/${student.id}`)
+    .then(() => dispatch({ type: DELETE_STUDENT, student }));
+
 export default (state = [], action) => {
   switch (action.type) {
     case GET_STUDENTS:
@@ -27,6 +32,8 @@ export default (state = [], action) => {
       return [...state, action.student];
     case UPDATE_STUDENT:
       return state.map(student => (student.id === action.student.id ? action.student : student));
+    case DELETE_STUDENT:
+      return state.filter(student => student.id !== action.student.id);
     default:
       return state;
   }

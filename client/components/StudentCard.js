@@ -1,9 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-export default props => {
-  const { student } = props;
+import { deleteStudent } from '../store/students';
+
+export default ({ student }) => {
+  const dispatch = useDispatch();
   const campus = useSelector(state =>
     state.campuses.find(campus => student.campusId === campus.id)
   );
@@ -18,11 +20,20 @@ export default props => {
         </div>
         <div className="card-footer d-flex justify-content-between align-items-center">
           <small className="text-muted">{campus ? campus.name : 'Not enrolled.'}</small>
-          <Link to={`/students/${student.id}/edit`}>
-            <button type="button" className="btn btn-secondary btn-sm">
-              Edit
+          <div>
+            <Link to={`/students/${student.id}/edit`}>
+              <button type="button" className="btn btn-secondary btn-sm">
+                Edit
+              </button>
+            </Link>
+            <button
+              type="button"
+              className="btn btn-danger btn-sm ms-1"
+              onClick={() => dispatch(deleteStudent(student))}
+            >
+              Delete
             </button>
-          </Link>
+          </div>
         </div>
       </div>
     </div>
