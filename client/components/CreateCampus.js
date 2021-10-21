@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { createCampus } from '../store/campuses';
 
 export default () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [state, setState] = useState({
     name: '',
@@ -15,13 +17,11 @@ export default () => {
     imageURL: '',
   });
 
-  const onChange = (key, val) => {
-    setState({ ...state, [key]: val });
-  };
+  const onChange = (key, val) => setState({ ...state, [key]: val });
 
   const onSubmit = e => {
     e.preventDefault();
-    dispatch(createCampus(state));
+    dispatch(createCampus(state, history));
   };
 
   return (

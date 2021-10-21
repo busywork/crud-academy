@@ -7,17 +7,23 @@ export const fetchCampuses = () => dispatch =>
     .then(res => res.data)
     .then(campuses => dispatch({ type: GET_CAMPUSES, campuses }));
 
-export const createCampus = campus => dispatch =>
+export const createCampus = (campus, history) => dispatch =>
   axios
     .post('/api/campuses', campus)
     .then(res => res.data)
-    .then(campus => dispatch({ type: CREATE_CAMPUS, campus }));
+    .then(campus => {
+      dispatch({ type: CREATE_CAMPUS, campus });
+      history.push('/campuses');
+    });
 
-export const updateCampus = campus => dispatch =>
+export const updateCampus = (campus, history) => dispatch =>
   axios
     .put(`/api/campuses/${campus.id}`, campus)
     .then(res => res.data)
-    .then(campus => dispatch({ type: UPDATE_CAMPUS, campus }));
+    .then(campus => {
+      dispatch({ type: UPDATE_CAMPUS, campus });
+      history.push('/campuses');
+    });
 
 export const deleteCampus = campus => dispatch =>
   axios.delete(`/api/campuses/${campus.id}`).then(() => dispatch({ type: DELETE_CAMPUS, campus }));

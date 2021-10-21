@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { createStudent } from '../store/students';
 
 export default () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const campuses = useSelector(state => state.campuses);
 
   const [state, setState] = useState({
@@ -14,13 +16,11 @@ export default () => {
     imageURL: '',
   });
 
-  const onChange = (key, val) => {
-    setState({ ...state, [key]: val });
-  };
+  const onChange = (key, val) => setState({ ...state, [key]: val });
 
   const onSubmit = e => {
     e.preventDefault();
-    dispatch(createStudent(state));
+    dispatch(createStudent(state, history));
   };
 
   return (

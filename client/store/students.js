@@ -7,17 +7,23 @@ export const fetchStudents = () => dispatch =>
     .then(res => res.data)
     .then(students => dispatch({ type: GET_STUDENTS, students }));
 
-export const createStudent = student => dispatch =>
+export const createStudent = (student, history) => dispatch =>
   axios
     .post('/api/students', student)
     .then(res => res.data)
-    .then(student => dispatch({ type: CREATE_STUDENT, student }));
+    .then(student => {
+      dispatch({ type: CREATE_STUDENT, student });
+      history.push('/students');
+    });
 
-export const updateStudent = student => dispatch =>
+export const updateStudent = (student, history) => dispatch =>
   axios
     .put(`/api/students/${student.id}`, student)
     .then(res => res.data)
-    .then(student => dispatch({ type: UPDATE_STUDENT, student }));
+    .then(student => {
+      dispatch({ type: UPDATE_STUDENT, student });
+      history.push('/students');
+    });
 
 export const deleteStudent = student => dispatch =>
   axios

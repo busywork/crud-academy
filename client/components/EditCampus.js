@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouteMatch } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { updateCampus } from '../store/campuses';
 
 export default () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const match = useRouteMatch();
   const campuses = useSelector(state => state.campuses);
 
@@ -26,7 +27,7 @@ export default () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    dispatch(updateCampus(state));
+    dispatch(updateCampus(state, history));
   };
 
   return state ? (
