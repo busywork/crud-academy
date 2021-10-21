@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { createCampus } from '../store/campuses';
 
@@ -90,6 +90,11 @@ export default () => {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+        <Link to="/campuses">
+          <button type="button" className="btn btn-danger ms-1">
+            Cancel
+          </button>
+        </Link>
       </div>
     </form>
   );

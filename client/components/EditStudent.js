@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { updateStudent } from '../store/students';
 
 export default () => {
@@ -92,6 +92,11 @@ export default () => {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+        <Link to="/students">
+          <button type="button" className="btn btn-danger ms-1">
+            Cancel
+          </button>
+        </Link>
       </div>
     </form>
   ) : null;
