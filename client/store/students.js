@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { GET_STUDENTS, CREATE_STUDENT, UPDATE_STUDENT, DELETE_STUDENT } from './constants';
+import { errorHandler } from './errors';
 
 export const fetchStudents = () => dispatch =>
   axios
@@ -14,7 +15,8 @@ export const createStudent = (student, history) => dispatch =>
     .then(student => {
       dispatch({ type: CREATE_STUDENT, student });
       history.push('/students');
-    });
+    })
+    .catch(err => dispatch(errorHandler(err.response.data.errors)));
 
 export const updateStudent = (student, history) => dispatch =>
   axios
@@ -23,7 +25,8 @@ export const updateStudent = (student, history) => dispatch =>
     .then(student => {
       dispatch({ type: UPDATE_STUDENT, student });
       history.push('/students');
-    });
+    })
+    .catch(err => dispatch(errorHandler(err.response.data.errors)));
 
 export const deleteStudent = student => dispatch =>
   axios

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { GET_CAMPUSES, CREATE_CAMPUS, UPDATE_CAMPUS, DELETE_CAMPUS } from './constants';
+import { errorHandler } from './errors';
 
 export const fetchCampuses = () => dispatch =>
   axios
@@ -14,7 +15,8 @@ export const createCampus = (campus, history) => dispatch =>
     .then(campus => {
       dispatch({ type: CREATE_CAMPUS, campus });
       history.push('/campuses');
-    });
+    })
+    .catch(err => dispatch(errorHandler(err.response.data.errors)));
 
 export const updateCampus = (campus, history) => dispatch =>
   axios
@@ -23,7 +25,8 @@ export const updateCampus = (campus, history) => dispatch =>
     .then(campus => {
       dispatch({ type: UPDATE_CAMPUS, campus });
       history.push('/campuses');
-    });
+    })
+    .catch(err => dispatch(errorHandler(err.response.data.errors)));
 
 export const deleteCampus = campus => dispatch =>
   axios.delete(`/api/campuses/${campus.id}`).then(() => dispatch({ type: DELETE_CAMPUS, campus }));

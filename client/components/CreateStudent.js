@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
 import { createStudent } from '../store/students';
+import { clearErrors } from '../store/errors';
 
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const campuses = useSelector(state => state.campuses);
+  const errors = useSelector(state => state.errors);
 
   const [state, setState] = useState({
     firstName: '',
@@ -15,6 +17,10 @@ export default () => {
     email: '',
     imageURL: '',
   });
+
+  useEffect(() => {
+    return () => dispatch(clearErrors());
+  }, []);
 
   const onChange = (key, val) => setState({ ...state, [key]: val });
 
@@ -30,30 +36,37 @@ export default () => {
           id="firstName"
           value={state.firstName}
           onChange={e => onChange('firstName', e.target.value)}
-          className="form-control"
+          className={`form-control ${
+            errors.find(err => err.path === 'firstName') ? 'is-invalid' : ''
+          }`}
           placeholder="First Name"
         />
         <label htmlFor="firstName">First Name</label>
+        <div className="invalid-feedback">Please enter a first name.</div>
       </div>
       <div className="form-floating mb-3">
         <input
           id="lastName"
           value={state.lastName}
           onChange={e => onChange('lastName', e.target.value)}
-          className="form-control"
+          className={`form-control ${
+            errors.find(err => err.path === 'lastName') ? 'is-invalid' : ''
+          }`}
           placeholder="Last Name"
         />
         <label htmlFor="lastName">Last Name</label>
+        <div className="invalid-feedback">Please enter a last name.</div>
       </div>
       <div className="form-floating mb-3">
         <input
           id="email"
           value={state.email}
           onChange={e => onChange('email', e.target.value)}
-          className="form-control"
+          className={`form-control ${errors.find(err => err.path === 'email') ? 'is-invalid' : ''}`}
           placeholder="Email"
         />
         <label htmlFor="email">Email</label>
+        <div className="invalid-feedback">Please enter an email.</div>
       </div>
       <div className="form-floating mb-3">
         <input
