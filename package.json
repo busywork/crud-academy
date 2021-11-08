@@ -6,7 +6,7 @@
   "scripts": {
     "seed": "node seed.js",
     "start": "node server",
-    "start-dev": "webpack -w --mode development & nodemon server",
+    "start-dev": "webpack -w --mode development & nodemon -r dotenv/config server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Chung",
@@ -31,6 +31,7 @@
     "babel-loader": "^8.2.2",
     "cartoon-avatar": "^1.0.2",
     "chance": "^1.1.8",
+    "dotenv": "^10.0.0",
     "faker": "^5.5.3",
     "nodemon": "^2.0.13",
     "webpack": "^5.57.1",

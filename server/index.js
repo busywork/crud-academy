@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const path = require('path');
 
 const db = require('./db');
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 
