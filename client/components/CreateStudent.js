@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { createStudent } from '../store/students';
 import { clearErrors } from '../store/errors';
@@ -97,11 +97,9 @@ export default () => {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
-        <Link to="/students">
-          <button type="button" className="btn btn-danger ms-1">
-            Cancel
-          </button>
-        </Link>
+        <button type="button" className="btn btn-danger ms-1" onClick={() => history.goBack()}>
+          Cancel
+        </button>
       </div>
     </form>
   );
